@@ -18,3 +18,14 @@
 ### How to clean up (from Terminal):
 
 1. Run `ant clean` to clean the project (i.e., delete all generated files).
+
+### Undo functionality 
+
+1. Added UndoFunctionality class in the view. The update function in this class enables/disables undo button on the view based on the conditions mentioned below -
+	
+	a. Undo button will be enabled when a legal move is made.
+	b. Undo button will be disabled when a new game is started, when the game is reset , when undo is used for the current move or if there is a winning or tie condition.
+
+2. undoGame function is added in the controller, which will fetch the last moved block, reset the view and makes that block as legal move. And finally switches back the player and updates the view.
+
+3. isThereMoveToUndo() method is implemented in the model which will return boolean based on whether there was a previous legal move made which can be undone.
