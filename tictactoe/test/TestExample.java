@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+import model.RowGameModel;
 import model.Player;
 import model.RowBlockModel;
 import view.RowGameGUI;
@@ -75,6 +75,33 @@ public class TestExample {
         assertEquals("Player 1 wins!", game.gameModel.getFinalResult());
         assertEquals(false, game.gameModel.isThereMoveToUndo());
     }
+
+    @Test
+    public void testTieCondition(){
+        game.resetGame();
+        //pre-condtion undo should be disabled and getFinalResult must be null 
+        assertEquals (9, game.gameModel.movesLeft);
+        assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
+        assertEquals(false, game.gameModel.isThereMoveToUndo());
+        assertNull(game.gameModel.getFinalResult());
+
+        //Make moves for tie condition
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(4));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(3));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(6));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(5));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(1));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(7));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(5));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
+
+        //post condition - To check for tie condition
+        assertEquals(0,game.gameModel.movesLeft);
+        assertEquals(RowGameModel.GAME_END_NOWINNER, game.gameModel.getFinalResult());
+    }
+
+
     /*
     //NEED TO RE-EXECUTE
     @Test
