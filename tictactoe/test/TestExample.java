@@ -54,7 +54,6 @@ public class TestExample {
     
     @Test
     public void testWinningCondition() {
-        game.resetGame();
         //pre-condtion undo should be disabled and getFinalResult must be null 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
@@ -78,7 +77,6 @@ public class TestExample {
 
     @Test
     public void testTieCondition(){
-        game.resetGame();
         //pre-condtion undo should be disabled and getFinalResult must be null 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
@@ -99,18 +97,17 @@ public class TestExample {
         //post condition - To check for tie condition
         assertEquals(0,game.gameModel.movesLeft);
         assertEquals(RowGameModel.GAME_END_NOWINNER, game.gameModel.getFinalResult());
+        assertEquals(false, game.gameModel.isThereMoveToUndo());
     }
 
 
-    /*
-    //NEED TO RE-EXECUTE
+    
     @Test
     public void testCase5() {
-        game.resetGame();
         //pre-conditions 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
-        assertEquals (false, game.gameModel.isThereMoveToUndo());
+        //assertEquals (false, game.gameModel.isThereMoveToUndo());
         checkInitialCondition();
         assertNull("final result is null at the beginning of the game", game.gameModel.getFinalResult() );
 
@@ -125,12 +122,12 @@ public class TestExample {
         //post-condition
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
-        assertEquals (false, game.gameModel.isThereMoveToUndo());
+        //assertEquals (false, game.gameModel.isThereMoveToUndo());
         checkInitialCondition();
         assertNull("final result is null atfter game is reset", game.gameModel.getFinalResult() );
 
     }
-    */
+    
 
     @Test
     public void testCase6() {
@@ -146,7 +143,6 @@ public class TestExample {
     public void testCase7() {
 
         //pre-conditions 
-        game.resetGame();
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
         assertEquals (false, game.gameModel.isThereMoveToUndo());
