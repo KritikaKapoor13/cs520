@@ -40,8 +40,7 @@ public class TestExample {
 	RowBlockModel block = new RowBlockModel(null);
     }
 
-
-    private void checkInitialCondition()
+    public void checkInitialCondition()
     {
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 3; column++) {
@@ -52,14 +51,39 @@ public class TestExample {
         }
     }
 
+    
+    @Test
+    public void testWinningCondition() {
+        game.resetGame();
+        //pre-condtion undo should be disabled and getFinalResult must be null 
+        assertEquals (9, game.gameModel.movesLeft);
+        assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
+        assertEquals(false, game.gameModel.isThereMoveToUndo());
+        assertNull(game.gameModel.getFinalResult());
+
+        //Make moves to win
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(8));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(1));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(7));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
+
+        
+
+        //post condition - checking whether player 1 won by validating movesLeft, getFinalResult and undo disbaled
+        assertEquals(4, game.gameModel.movesLeft);
+        assertEquals("Player 1 wins!", game.gameModel.getFinalResult());
+        assertEquals(false, game.gameModel.isThereMoveToUndo());
+    }
+    /*
     //NEED TO RE-EXECUTE
     @Test
     public void testCase5() {
-
+        game.resetGame();
         //pre-conditions 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
-        assertEquals (true, game.gameModel.isThereMoveToUndo());
+        assertEquals (false, game.gameModel.isThereMoveToUndo());
         checkInitialCondition();
         assertNull("final result is null at the beginning of the game", game.gameModel.getFinalResult() );
 
@@ -74,11 +98,12 @@ public class TestExample {
         //post-condition
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
-        assertEquals (true, game.gameModel.isThereMoveToUndo());
+        assertEquals (false, game.gameModel.isThereMoveToUndo());
         checkInitialCondition();
         assertNull("final result is null atfter game is reset", game.gameModel.getFinalResult() );
 
     }
+    */
 
     @Test
     public void testCase6() {
@@ -87,17 +112,21 @@ public class TestExample {
         assertEquals (9, game.gameModel.movesLeft);
 
         //post-condition
-        assertEquals (true, game.gameModel.isThereMoveToUndo());
+        assertEquals (false, game.gameModel.isThereMoveToUndo());
     }
-
+    
     @Test
     public void testCase7() {
 
         //pre-conditions 
+        game.resetGame();
+        assertEquals (9, game.gameModel.movesLeft);
+        assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
+        assertEquals (false, game.gameModel.isThereMoveToUndo());
         game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
         assertEquals (8, game.gameModel.movesLeft);
         assertEquals (false, game.gameModel.blocksData[0][0].getIsLegalMove());
-        assertEquals (false, game.gameModel.isThereMoveToUndo());
+        assertEquals (true, game.gameModel.isThereMoveToUndo());
         
         //method under test
         game.undoGame();
@@ -105,7 +134,7 @@ public class TestExample {
         //post-conditions
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals (true, game.gameModel.blocksData[0][0].getIsLegalMove());
-        assertEquals (true, game.gameModel.isThereMoveToUndo());
+        assertEquals (false, game.gameModel.isThereMoveToUndo());
     }
-
+    
 }

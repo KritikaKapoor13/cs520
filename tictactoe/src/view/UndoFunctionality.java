@@ -34,6 +34,8 @@ public class UndoFunctionality implements View
     //Undo should be enabled only when there are moves left to play
         if(!model.isThereMoveToUndo() || model.getFinalResult()!=null) {
             this.undo.setEnabled(false);
+            model.lastMovedBlock[0] = -1;
+		    model.lastMovedBlock[1] = -1;
         } else {
             this.undo.setEnabled(true);
         }

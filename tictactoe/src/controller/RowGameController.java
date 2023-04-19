@@ -401,7 +401,7 @@ public class RowGameController {
 		
 		gameModel.lastMovedBlock[0] = -1;
 		gameModel.lastMovedBlock[1] = -1;
-
+		
 		if(gameModel.getPlayer().equals(Player.PLAYER_2)) {
 			gameModel.setPlayer(Player.PLAYER_1);
 		} else {
