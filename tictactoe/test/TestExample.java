@@ -40,6 +40,30 @@ public class TestExample {
 	RowBlockModel block = new RowBlockModel(null);
     }
 
+    // @Test
+    // public void testCase1() {
+
+    // }
+
+    @Test
+    public void testCase2() {
+    
+    assertEquals (9, game.gameModel.movesLeft);
+    assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
+    assertEquals(false, game.gameModel.isThereMoveToUndo());
+    assertNull(game.gameModel.getFinalResult());
+	checkInitialCondition();
+	
+    //method under test
+    game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
+        
+	//post-conditions
+	assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+	assertEquals(8, game.gameModel.movesLeft);
+	assertEquals("X", game.gameModel.blocksData[0][0].getContents());
+	assertEquals(false, game.gameModel.blocksData[0][0].getIsLegalMove());
+    }
+
     public void checkInitialCondition()
     {
         for (int row = 0; row < 3; row++) {
@@ -68,42 +92,40 @@ public class TestExample {
         game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(7));
         game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
 
-        
-
         //post condition - checking whether player 1 won by validating movesLeft, getFinalResult and undo disbaled
         assertEquals(4, game.gameModel.movesLeft);
         assertEquals("Player 1 wins!", game.gameModel.getFinalResult());
         assertEquals(false, game.gameModel.isThereMoveToUndo());
     }
-    /*
-    //NEED TO RE-EXECUTE
-    @Test
-    public void testCase5() {
-        game.resetGame();
-        //pre-conditions 
-        assertEquals (9, game.gameModel.movesLeft);
-        assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
-        assertEquals (false, game.gameModel.isThereMoveToUndo());
-        checkInitialCondition();
-        assertNull("final result is null at the beginning of the game", game.gameModel.getFinalResult() );
 
-        //method under test
-        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
-        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(1));
-        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
-        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(3));
+    // @Test
+    // public void testCase5() {
+
+    //     game.resetGame();
+
+    //     //pre-conditions 
+    //     assertEquals (9, game.gameModel.movesLeft);
+    //     assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
+    //     assertEquals (false, game.gameModel.isThereMoveToUndo());
+    //     checkInitialCondition();
+    //     assertNull("final result is null at the beginning of the game", game.gameModel.getFinalResult() );
+
+    //     //method under test
+    //     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
+    //     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(1));
+    //     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
+    //     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(3));
         
-        game.resetGame();
+    //     game.resetGame();
 
-        //post-condition
-        assertEquals (9, game.gameModel.movesLeft);
-        assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
-        assertEquals (false, game.gameModel.isThereMoveToUndo());
-        checkInitialCondition();
-        assertNull("final result is null atfter game is reset", game.gameModel.getFinalResult() );
+    //     //post-condition
+    //     assertEquals (9, game.gameModel.movesLeft);
+    //     assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
+    //     assertEquals (false, game.gameModel.isThereMoveToUndo());
+    //     checkInitialCondition();
+    //     assertNull("final result is null atfter game is reset", game.gameModel.getFinalResult() );
 
-    }
-    */
+    // }
 
     @Test
     public void testCase6() {
