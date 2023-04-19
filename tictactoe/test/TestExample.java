@@ -41,7 +41,7 @@ public class TestExample {
     }
 
     @Test
-    public void testCase1() {
+    public void illegalMove_testcase1() {
 
     game.resetGame();
     //pre conditions
@@ -70,7 +70,7 @@ public class TestExample {
     }
 
     @Test
-    public void testCase2() {
+    public void legalMove_testcase2() {
     game.resetGame();
     assertEquals (9, game.gameModel.movesLeft);
     assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
@@ -101,7 +101,7 @@ public class TestExample {
 
     
     @Test
-    public void testWinningCondition() {
+    public void WinningCondition_testcase3() {
         //pre-condtion undo should be disabled and getFinalResult must be null 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
@@ -122,7 +122,7 @@ public class TestExample {
     }
 
     @Test
-    public void testTieCondition(){
+    public void TieCondition_testcase4(){
         //pre-condtion undo should be disabled and getFinalResult must be null 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
@@ -149,26 +149,26 @@ public class TestExample {
 
     
     @Test
-    public void testCase5() {
+    public void resetGame_testCase5() {
         //pre-conditions 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
-        //assertEquals (false, game.gameModel.isThereMoveToUndo());
+        assertEquals (false, game.gameModel.isThereMoveToUndo());
         checkInitialCondition();
         assertNull("final result is null at the beginning of the game", game.gameModel.getFinalResult() );
 
-    //     //method under test
-    //     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
-    //     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(1));
-    //     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
-    //     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(3));
+        //method under test
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(1));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(3));
         
-    //     game.resetGame();
+        game.resetGame();
 
         //post-condition
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals (Player.PLAYER_1, game.gameModel.getPlayer());
-        //assertEquals (false, game.gameModel.isThereMoveToUndo());
+        assertEquals (false, game.gameModel.isThereMoveToUndo());
         checkInitialCondition();
         assertNull("final result is null atfter game is reset", game.gameModel.getFinalResult() );
 
@@ -176,7 +176,7 @@ public class TestExample {
     
 
     @Test
-    public void testCase6() {
+    public void undoDisableInitialCondition_testCase6() {
 
         //pre-conditions 
         assertEquals (9, game.gameModel.movesLeft);
@@ -186,7 +186,7 @@ public class TestExample {
     }
     
     @Test
-    public void testCase7() {
+    public void undoEnabledAfterOneMove_testCase7() {
 
         //pre-conditions 
         assertEquals (9, game.gameModel.movesLeft);
