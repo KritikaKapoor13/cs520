@@ -46,6 +46,9 @@ public class RowGameModel
 	this.finalResult = finalResult;
     }
 
+    /**
+     * returns boolean based on whether a previous legal move was made or not
+     */
     public boolean isThereMoveToUndo() {
         if(this.lastMovedBlock[0] == -1 && this.lastMovedBlock[1] == -1) {
             return false;

@@ -61,12 +61,12 @@ public class TestExample {
 
     //making illegal move - clicking same block again
     game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
-    
-    // //post conditions
-    // //assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
-    // assertEquals(8, game.gameModel.movesLeft);
-    // assertEquals("X", game.gameModel.blocksData[0][0].getContents());
-    // assertEquals(false, game.gameModel.blocksData[0][0].getIsLegalMove());
+
+    //post conditions
+    assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+    assertEquals(8, game.gameModel.movesLeft);
+    assertEquals("X", game.gameModel.blocksData[0][0].getContents());
+    assertEquals(false, game.gameModel.blocksData[0][0].getIsLegalMove());
     }
 
     @Test
@@ -123,6 +123,7 @@ public class TestExample {
 
     @Test
     public void TieCondition_testcase4(){
+        game.resetGame();
         //pre-condtion undo should be disabled and getFinalResult must be null 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
@@ -137,7 +138,7 @@ public class TestExample {
         game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(5));
         game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(1));
         game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(7));
-        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(5));
+        game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(8));
         game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(2));
 
         //post condition - To check for tie condition
@@ -188,6 +189,7 @@ public class TestExample {
     @Test
     public void undoEnabledAfterOneMove_testCase7() {
 
+        game.resetGame();
         //pre-conditions 
         assertEquals (9, game.gameModel.movesLeft);
         assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());

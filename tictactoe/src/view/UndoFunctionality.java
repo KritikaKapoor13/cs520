@@ -7,12 +7,8 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 import javax.swing.JButton;
 
-
 /**
- * The GameStatusView class visualizes the game status as either in progress,
- * current player's turn, or finished, either win or tie.
- *
- * NOTE) For the Composite design pattern, this class is-a Component (i.e. View).
+ * Class to implement undo functionality
  */
 public class UndoFunctionality implements View
 {
@@ -22,7 +18,10 @@ public class UndoFunctionality implements View
 	super();
 
 	options.add(undo);
-
+    
+    /**
+     * Adding action listener to undo button
+    */
     undo.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         controller.undoGame();
@@ -30,8 +29,10 @@ public class UndoFunctionality implements View
     });
     }
 
+    /**
+     * Undo should be enabled only when there are moves left to play
+     */
     public void update(RowGameModel model) {
-    //Undo should be enabled only when there are moves left to play
         if(!model.isThereMoveToUndo() || model.getFinalResult()!=null) {
             this.undo.setEnabled(false);
             model.lastMovedBlock[0] = -1;

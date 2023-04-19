@@ -42,9 +42,13 @@ public class RowGameController {
      */
     public void move(JButton block) {
 	// The Controller first manipulates the Model.
-	gameModel.movesLeft--;
 
 	BlockIndex blockIndex = gameView.getBlockIndex(block);
+	if(!gameModel.blocksData[blockIndex.getRow()][blockIndex.getColumn()].getIsLegalMove() || blockIndex==null) {
+		return;
+	}
+	
+	gameModel.movesLeft--;
 	
 	gameModel.lastMovedBlock[0] = blockIndex.getRow();
 	gameModel.lastMovedBlock[1] = blockIndex.getColumn();
@@ -392,7 +396,7 @@ public class RowGameController {
     }
 
 	/**
-     * Undoes previous move(s).
+     * Undoes previous move.
      */
     public void undoGame() {
 	// The Controller first manipulates the Model.
