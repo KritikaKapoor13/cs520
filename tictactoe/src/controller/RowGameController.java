@@ -383,6 +383,8 @@ public class RowGameController {
         }
         gameModel.setPlayer(Player.PLAYER_1);
         gameModel.movesLeft = 9;
+		gameModel.lastMovedBlock[0] = -1;
+		gameModel.lastMovedBlock[1] = -1;
 	gameModel.setFinalResult(null);
 
 	// The Controller then updates the View.
