@@ -40,14 +40,38 @@ public class TestExample {
 	RowBlockModel block = new RowBlockModel(null);
     }
 
-    // @Test
-    // public void testCase1() {
+    @Test
+    public void testCase1() {
 
-    // }
+    game.resetGame();
+    //pre conditions
+    assertEquals (9, game.gameModel.movesLeft);
+    assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
+    assertEquals(false, game.gameModel.isThereMoveToUndo());
+    assertNull(game.gameModel.getFinalResult());
+	checkInitialCondition();
+
+    //making legal move
+    game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
+     
+    assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+    assertEquals(8, game.gameModel.movesLeft);
+    assertEquals("X", game.gameModel.blocksData[0][0].getContents());
+    assertEquals(false, game.gameModel.blocksData[0][0].getIsLegalMove());
+
+    //making illegal move - clicking same block again
+    game.move((JButton) ((JPanel)((JPanel)game.gameView.gui.getContentPane().getComponent(0)).getComponent(0)).getComponent(0));
+    
+    // //post conditions
+    // //assertEquals(Player.PLAYER_2, game.gameModel.getPlayer());
+    // assertEquals(8, game.gameModel.movesLeft);
+    // assertEquals("X", game.gameModel.blocksData[0][0].getContents());
+    // assertEquals(false, game.gameModel.blocksData[0][0].getIsLegalMove());
+    }
 
     @Test
     public void testCase2() {
-    
+    game.resetGame();
     assertEquals (9, game.gameModel.movesLeft);
     assertEquals(Player.PLAYER_1, game.gameModel.getPlayer());
     assertEquals(false, game.gameModel.isThereMoveToUndo());
